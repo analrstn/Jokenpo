@@ -19,6 +19,8 @@ namespace Jokenpo
         ImageButton btnTesoura;
         TextView textpontuacao;
         TextView textResultado;
+        ImageView imageUsuario;
+        ImageView imageBot;
         const string VITORIA = "Vitória", DERROTA = "Derrota", EMPATE = "Empate";
         const int PEDRA = 0, PAPEL = 1, TESOURA = 2;
         string resultado;
@@ -27,6 +29,7 @@ namespace Jokenpo
         string placar;
         int pontosBot = 0;
         int pontosPlayer = 0;
+        public static string resultadoFinal;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -39,6 +42,8 @@ namespace Jokenpo
             btnTesoura = FindViewById<ImageButton>(Resource.Id.btnTesoura);
             textpontuacao = FindViewById<TextView>(Resource.Id.textpontuacao);
             textResultado = FindViewById<TextView>(Resource.Id.textResultado);
+            imageUsuario = FindViewById<ImageView>(Resource.Id.imageUsuario);
+            imageBot = FindViewById<ImageView>(Resource.Id.imageBot);
 
             btnPedra.Click += BtnPedra_Click;
             btnPapel.Click += BtnPapel_Click;
@@ -60,7 +65,25 @@ namespace Jokenpo
             jogar(PEDRA);
         }
 
-        public void comparar(int escolha)
+        private void exibirImagem(int escolha, ImageView image)
+        {
+            string imageName;
+            if (escolha == PEDRA)
+            {
+                imageName = "preda";
+            } else if (escolha == PAPEL)
+            {
+                imageName = "papel";
+            } else
+            {
+                imageName = "tesoura";
+            }
+            
+            int resourceId = (int)typeof(Resource.Drawable).GetField(imageName).GetValue(null);
+            image.SetImageResource(resourceId);
+        }
+
+        public int comparar(int escolha)
         {
             int sorteio = sortear();
             if (escolha == sorteio)
@@ -91,7 +114,7 @@ namespace Jokenpo
             {
                 resultado = DERROTA;
             }
-
+            return sorteio;
         }
 
         public int sortear()
@@ -106,35 +129,35 @@ namespace Jokenpo
             if (resultado == VITORIA)
             {
                 pontosPlayer++;
-                textResultado.Text = VITORIA;
             }
             else if (resultado == DERROTA)
             {
                 pontosBot++;
-                textResultado.Text = DERROTA;
             }
+            textResultado.Text = resultado;
         }
 
         public void jogar(int escolha)
         {
-            if (pontosPlayer < 3 && pontosBot < 3)
-            {
-                comparar(escolha);
-                contabilizar(resultado);
-                calcularPlacar();
-            }
-            else
+            int sorteio = comparar(escolha);
+            contabilizar(resultado);
+            calcularPlacar();
+            //exibirImagem(escolha, imageUsuario);
+            //exibirImagem(sorteio, imageBot);
+
+            if(pontosPlayer > 2 || pontosBot > 2)
             {
                 if (pontosPlayer > pontosBot)
                 {
-                    //alguma coisa deveria acontecer LABEL = VENCEDOR
+                    resultadoFinal = VENCEDOR;
                 }
                 else
                 {
-                    //outra coisa deveria acontecer LABEL = PERDEDOR
+                    resultadoFinal = PERDEDOR;
                 }
 
                 zerarPontos();
+                StartActivity(typeof(ResultadoActivity));
             }
         }
 
@@ -147,7 +170,7 @@ namespace Jokenpo
 
         public void calcularPlacar()
         {
-            placar = "Jogador " + pontosPlayer + " x " + pontosBot + "Bot";
+            placar = "Jogador " + pontosPlayer + " x " + pontosBot + " Bot";
             textpontuacao.Text = placar;
         }
     }

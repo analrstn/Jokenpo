@@ -25,20 +25,49 @@
         android:id="@+id/btnPapel"
         android:layout_marginTop="50.0dp" 
         android:layout_marginLeft="145.0dp"/>
-        <ImageButton
+    <ImageButton
         android:src="@android:drawable/ic_menu_gallery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnTesoura"
         android:layout_marginTop="50.0dp" 
         android:layout_marginLeft="270.0dp"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutBatalha">
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="100px"
+            android:layout_marginRight="120px"
+            android:id="@+id/imageUsuario" />
+        <TextView
+            android:text="X"
+            android:textAlignment="center"
+            android:textSize="80px"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/textViewX" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="100px"
+            android:layout_marginLeft="120px"
+            android:id="@+id/imageBot" />
+    </LinearLayout>
     <TextView
         android:text=""
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textpontuacao"
-        android:layout_marginTop="200.0dp"
+        android:layout_marginTop="150.0dp"
         android:layout_marginLeft="155.0dp"/>
     <TextView
         android:text=""
@@ -46,6 +75,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textResultado"
-        android:layout_marginTop="230.0dp"
+        android:layout_marginTop="150.0dp"
         android:layout_marginLeft="155.0dp"/>
 </LinearLayout>
