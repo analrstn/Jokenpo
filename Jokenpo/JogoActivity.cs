@@ -1,8 +1,10 @@
 ﻿using Android.App;
 using Android.Content;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Runtime;
 using Android.Views;
+using Android.Views.Animations;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,10 @@ namespace Jokenpo
         TextView textResultado;
         ImageView imageUsuario;
         ImageView imageBot;
+        LinearLayout layoutBatalha;
+
+        Animation animacaoRotacao;
+
         const string VITORIA = "Vitória", DERROTA = "Derrota", EMPATE = "Empate";
         const int PEDRA = 0, PAPEL = 1, TESOURA = 2;
         string resultado;
@@ -44,6 +50,9 @@ namespace Jokenpo
             textResultado = FindViewById<TextView>(Resource.Id.textResultado);
             imageUsuario = FindViewById<ImageView>(Resource.Id.imageUsuario);
             imageBot = FindViewById<ImageView>(Resource.Id.imageBot);
+            layoutBatalha = FindViewById<LinearLayout>(Resource.Id.layoutBatalha);
+
+            animacaoRotacao = AnimationUtils.LoadAnimation(this, Resource.Animation.rotate);
 
             btnPedra.Click += BtnPedra_Click;
             btnPapel.Click += BtnPapel_Click;
@@ -70,7 +79,7 @@ namespace Jokenpo
             string imageName;
             if (escolha == PEDRA)
             {
-                imageName = "preda";
+                imageName = "pedra";
             } else if (escolha == PAPEL)
             {
                 imageName = "papel";
@@ -81,6 +90,7 @@ namespace Jokenpo
             
             int resourceId = (int)typeof(Resource.Drawable).GetField(imageName).GetValue(null);
             image.SetImageResource(resourceId);
+            image.StartAnimation(animacaoRotacao);
         }
 
         public int comparar(int escolha)
@@ -135,15 +145,19 @@ namespace Jokenpo
                 pontosBot++;
             }
             textResultado.Text = resultado;
+            textResultado.TextAlignment = TextAlignment.Center;
         }
 
         public void jogar(int escolha)
         {
+            layoutBatalha.Visibility = ViewStates.Visible;
             int sorteio = comparar(escolha);
             contabilizar(resultado);
             calcularPlacar();
-            //exibirImagem(escolha, imageUsuario);
-            //exibirImagem(sorteio, imageBot);
+            exibirImagem(escolha, imageUsuario);
+            exibirImagem(sorteio, imageBot);
+
+            
 
             if(pontosPlayer > 2 || pontosBot > 2)
             {
@@ -172,6 +186,7 @@ namespace Jokenpo
         {
             placar = "Jogador " + pontosPlayer + " x " + pontosBot + " Bot";
             textpontuacao.Text = placar;
+            textpontuacao.TextAlignment = TextAlignment.Center;
         }
     }
 }
