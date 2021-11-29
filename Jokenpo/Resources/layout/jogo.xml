@@ -12,21 +12,21 @@
         android:textAlignment="center"
         android:id="@+id/textIniciar" />
     <ImageButton
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/pedra"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPedra"
         android:layout_marginTop="50.0dp" 
         android:layout_marginLeft="20.0dp"/>
     <ImageButton
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/papel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPapel"
         android:layout_marginTop="50.0dp" 
         android:layout_marginLeft="145.0dp"/>
     <ImageButton
-        android:src="@android:drawable/ic_menu_gallery"
+        android:src="@drawable/tesoura"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnTesoura"
@@ -38,13 +38,15 @@
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="invisible"
         android:id="@+id/layoutBatalha">
         <ImageView
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="100px"
-            android:layout_marginRight="120px"
+            android:layout_marginLeft="80px"
+            android:layout_marginRight="100px"
+            
             android:id="@+id/imageUsuario" />
         <TextView
             android:text="X"
@@ -57,24 +59,26 @@
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="100px"
-            android:layout_marginLeft="120px"
+            android:layout_marginRight="80px"
+            android:layout_marginLeft="100px"
             android:id="@+id/imageBot" />
     </LinearLayout>
     <TextView
         android:text=""
+        android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginLeft="100px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textpontuacao"
-        android:layout_marginTop="150.0dp"
-        android:layout_marginLeft="155.0dp"/>
+        />
     <TextView
         android:text=""
+        android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_marginLeft="100px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textResultado"
-        android:layout_marginTop="150.0dp"
-        android:layout_marginLeft="155.0dp"/>
+        />
 </LinearLayout>
